@@ -1,0 +1,30 @@
+name: passport_mrz
+description: On-device passport MRZ scanning for Flutter — native OCR (Vision on iOS, ML Kit on Android) plus ICAO 9303 detection and check-digit validation.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.12.0
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  equatable: ^2.0.5
+  image: ^4.5.4
+  mrz_parser: ^2.0.1
+  path_provider: ^2.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: ly.websters.passportmrz
+        pluginClass: PassportMrzPlugin
+      ios:
+        pluginClass: PassportMrzPlugin

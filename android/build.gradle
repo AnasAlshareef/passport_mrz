@@ -1,0 +1,53 @@
+group = "ly.websters.passportmrz"
+version = "0.1.0"
+
+buildscript {
+    ext.kotlin_version = "2.1.0"
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.7.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    namespace = "ly.websters.passportmrz"
+    compileSdk = 36
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/kotlin"
+    }
+
+    defaultConfig {
+        minSdk = 24
+    }
+}
+
+dependencies {
+    // ML Kit's Android SDK directly, not google_mlkit_text_recognition: that
+    // plugin also pulls ML Kit's iOS pods, which have no arm64-simulator slice
+    // and so break Apple Silicon simulator builds. iOS uses Vision instead.
+    implementation("com.google.mlkit:text-recognition:16.0.1")
+}
